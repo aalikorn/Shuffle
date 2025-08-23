@@ -25,6 +25,9 @@
 import UIKit
 
 open class SwipeCard: SwipeView {
+    
+    public var maxSwipeX: CGFloat? = nil
+    public var maxSwipeY: CGFloat? = nil
 
   open var animationOptions = CardAnimationOptions()
 
@@ -116,13 +119,27 @@ open class SwipeCard: SwipeView {
     overlays.values.forEach { $0.frame = overlayContainer.bounds }
   }
 
-  func swipeTransform() -> CGAffineTransform {
-    let dragTranslation = panGestureRecognizer.translation(in: self)
-    let translation = CGAffineTransform(translationX: dragTranslation.x,
-                                        y: dragTranslation.y)
-    let rotation = CGAffineTransform(rotationAngle: swipeRotationAngle())
-    return translation.concatenating(rotation)
-  }
+    func swipeTransform() -> CGAffineTransform {
+        let dragTranslation = panGestureRecognizer.translation(in: self)
+
+        let limitedX: CGFloat
+        if let maxX = maxSwipeX {
+            limitedX = min(max(dragTranslation.x, -maxX), maxX)
+        } else {
+            limitedX = dragTranslation.x
+        }
+
+        let limitedY: CGFloat
+        if let maxY = maxSwipeY {
+            limitedY = min(max(dragTranslation.y, -maxY), maxY)
+        } else {
+            limitedY = dragTranslation.y
+        }
+
+        let translation = CGAffineTransform(translationX: limitedX, y: limitedY)
+        let rotation = CGAffineTransform(rotationAngle: swipeRotationAngle())
+        return translation.concatenating(rotation)
+    }
 
   func swipeRotationAngle() -> CGFloat {
     let superviewTranslation = panGestureRecognizer.translation(in: superview)
