@@ -150,10 +150,11 @@ open class SwipeCard: SwipeView {
   }
 
   func swipeRotationDirectionY() -> CGFloat {
-    if let touchPoint = touchLocation {
-      return (touchPoint.y < bounds.height / 2) ? 1 : -1
-    }
-    return 0
+//    if let touchPoint = touchLocation {
+//      return (touchPoint.y < bounds.height / 2) ? 1 : -1
+//    }
+//    return 0
+      return 1
   }
 
   func swipeOverlayPercentage(forDirection direction: SwipeDirection) -> CGFloat {
