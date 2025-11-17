@@ -27,7 +27,7 @@ import UIKit
 open class SwipeCardStack: UIView, SwipeCardDelegate, UIGestureRecognizerDelegate {
 
   /// A internal structure for a `SwipeCard` and it's corresponding index in the card stack's `dataSource`.
-  struct Card {
+  public struct Card {
     var index: Int
     var card: SwipeCard
   }
