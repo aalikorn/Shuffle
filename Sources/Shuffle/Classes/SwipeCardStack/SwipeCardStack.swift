@@ -28,8 +28,8 @@ open class SwipeCardStack: UIView, SwipeCardDelegate, UIGestureRecognizerDelegat
 
   /// A internal structure for a `SwipeCard` and it's corresponding index in the card stack's `dataSource`.
   public struct Card {
-    var index: Int
-    var card: SwipeCard
+    public var index: Int
+    public var card: SwipeCard
   }
 
   open var animationOptions = CardStackAnimationOptions()
@@ -63,7 +63,7 @@ open class SwipeCardStack: UIView, SwipeCardDelegate, UIGestureRecognizerDelegat
     return visibleCards.first?.index
   }
 
-  var numberOfVisibleCards: Int = 1
+  var numberOfVisibleCards: Int = 2
 
   /// An ordered array containing all pairs of currently visible cards.
   ///
